@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to right, #e0f7fa, #f1f8e9);
+  padding: 40px 20px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.2rem;
+  color: #00796b;
+}
+
+form, #resultado, #historial {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin: 20px auto;
+  max-width: 500px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+form:hover, #resultado:hover, #historial:hover {
+  transform: scale(1.01);
+}
+
+label {
+  font-weight: bold;
+  margin-top: 15px;
+  display: block;
+}
+
+input, select {
+  padding: 10px;
+  width: 100%;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #00796b;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #004d40;
+}
+
+#resultado p {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+#resultado h3 {
+  margin-bottom: 15px;
+  color: #388e3c;
+}
+
+#historial {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#historial h3 {
+  margin-bottom: 15px;
+  color: #455a64;
+}
+
+#historial li {
+  list-style: none;
+  background-color: #e8f5e9;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 30px;
+}
+
+#historial li::before {
+  content: "📄";
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+@media (max-width: 600px) {
+  form, #resultado, #historial {
+    padding: 20px;
+    width: 90%;
+  }
+}
