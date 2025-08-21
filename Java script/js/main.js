@@ -1,6 +1,30 @@
-// Constantes
-const INTERES = 0.25;
-const cuotasDisponibles = [3, 6, 12];
+// Variables que se van a cargar desde JSON
+let INTERES = 0;
+let cuotasDisponibles = [];
+
+// Función para cargar configuración remota
+async function cargarConfig() {
+  try {
+    const res = await fetch("../data/config.json");
+    const data = await res.json();
+
+    INTERES = data.interes;
+    cuotasDisponibles = data.cuotasDisponibles;
+
+    // Llenar el select dinámicamente
+    const select = document.getElementById("cuotas");
+    select.innerHTML = "";
+    cuotasDisponibles.forEach(c => {
+      const option = document.createElement("option");
+      option.value = c;
+      option.textContent = `${c} cuotas`;
+      select.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error al cargar configuración:", error);
+    Swal.fire("Error", "No se pudo cargar la configuración", "error");
+  }
+}
 
 // Función para calcular total a pagar
 function calcularPrestamo(monto, cuotas) {
@@ -8,10 +32,7 @@ function calcularPrestamo(monto, cuotas) {
   let total = monto + interesTotal;
   let valorCuota = total / cuotas;
 
-  return {
-    total,
-    valorCuota
-  };
+  return { total, valorCuota };
 }
 
 // Mostrar resultados en el DOM con SweetAlert2
@@ -54,8 +75,11 @@ function actualizarHistorial() {
   });
 }
 
-// Cargar historial al iniciar
-document.addEventListener("DOMContentLoaded", actualizarHistorial);
+// Cargar al inicio
+document.addEventListener("DOMContentLoaded", async () => {
+  await cargarConfig();
+  actualizarHistorial();
+});
 
 // Evento de envío del formulario
 document.getElementById("form-simulador").addEventListener("submit", function (e) {
